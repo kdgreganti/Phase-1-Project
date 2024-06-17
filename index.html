@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Magic: The Gathering Card Collection</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <script src="index.js"></script>
+    <div class="container">
+        <h1>Magic: The Gathering Card Collection</h1>
+        <div class="search-container">
+            <label for="cardName">Search by Card Name:</label>
+            <input type="text" id="cardName" placeholder="Enter card name">
+            <button onclick="searchCard()">Search</button>
+        </div>
+        <div id="searchResults"></div>
+        <div id="collection">
+            <h2>My Collection</h2>
+            <ul id="cardCollection">
+                <!-- Collection items will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
