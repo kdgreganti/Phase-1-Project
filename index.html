@@ -22,6 +22,21 @@
             </ul>
         </div>
     </div>
+    <div class="color-filter">
+        <label for="cardColor">Filter by Color:</label>
+        <select id="cardColor">
+            <option value="">All Colors</option>
+            <option value="White">White</option>
+            <option value="Blue">Blue</option>
+            <option value="Black">Black</option>
+            <option value="Red">Red</option>
+            <option value="Green">Green</option>
+            <option value="Colorless">Colorless</option>
+        </select>
+        <button onclick="filterByColor()">Filter</button>
+    </div>
+    <div id="colorFilteredResults"></div>
+    
     <script src="index.js"></script>
 </body>
 </html>
