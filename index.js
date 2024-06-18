@@ -15,6 +15,22 @@
         }
     }
 
+    // Function to fetch set data from Magic: The Gathering API
+    async function fetchSets() {
+        const url = `https://api.magicthegathering.io/v1/sets`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            return data.sets;
+        } catch (error) {
+            console.error('Error fetching sets:', error);
+            return [];
+        }
+    }
+
     // Function to display search results
     function displaySearchResults(cards) {
         const searchResultsContainer = document.getElementById('searchResults');
