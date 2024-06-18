@@ -85,16 +85,17 @@ function displaySearchResults(cards, containerId) {
     resultsContainer.appendChild(ul);
 }
     // Function to add card to collection
-    function addToCollection(card) {
-        const collectionList = document.getElementById('cardCollection');
-        const li = document.createElement('li');
-        li.textContent = `${card.name} (${card.type})`;
-        li.className = 'card-item';
-        li.addEventListener('click', () => displayCardImage(card));
-        collectionList.appendChild(li);
-    }
+function addToCollection(card) {
+    const collectionList = document.getElementById('cardCollection');
+    const li = document.createElement('li');
+    li.textContent = `${card.name} (${card.type})`;
+    li.className = 'card-item';
+    li.setAttribute('data-card-id', card.id);
+    li.addEventListener('click', () => removeFromCollection(card.id)); // Add event listener to remove the card
+    collectionList.appendChild(li);
+}
 
-        // Function to remove a card from the collection
+// Function to remove a card from the collection
 function removeFromCollection(cardId) {
     const collectionList = document.getElementById('cardCollection');
     const cardToRemove = collectionList.querySelector(`[data-card-id="${cardId}"]`);
