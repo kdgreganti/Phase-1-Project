@@ -67,11 +67,12 @@ button {
 .filter-container {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     margin-bottom: 20px;
 }
 
-.color-filter, .type-filter {
-    flex: 1;
+.filter {
+    margin-right: 10px;
 }
 
 .filter-container label {
