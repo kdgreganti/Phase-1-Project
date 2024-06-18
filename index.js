@@ -93,13 +93,22 @@
     async function searchCard() {
         const cardNameInput = document.getElementById('cardName');
         const cardName = cardNameInput.value.trim();
-
+    
         if (cardName === '') {
             alert('Please enter a card name to search.');
             return;
         }
-
-        const cards = await fetchCards({ name: cardName });
+    
+        const cardColor = document.getElementById('cardColor').value;
+        const cardType = document.getElementById('cardType').value;
+        const cardSet = document.getElementById('cardSet').value;
+    
+        const queryParams = { name: cardName };
+        if (cardColor) queryParams.colors = cardColor;
+        if (cardType) queryParams.types = cardType;
+        if (cardSet) queryParams.set = cardSet;
+    
+        const cards = await fetchCards(queryParams);
         displaySearchResults(cards, 'searchResults');
     }
 
