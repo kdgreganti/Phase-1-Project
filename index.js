@@ -49,10 +49,15 @@
  // Function to display search results
 function displaySearchResults(cards, containerId) {
     const resultsContainer = document.getElementById(containerId);
-    resultsContainer.innerHTML = '';
+    resultsContainer.innerHTML = ''; // Clear previous results
+
+    // Add title "Search Results"
+    const title = document.createElement('h2');
+    title.textContent = 'Search Results';
+    resultsContainer.appendChild(title);
 
     if (cards.length === 0) {
-        resultsContainer.innerHTML = '<p>No cards found.</p>';
+        resultsContainer.innerHTML += '<p>No cards found.</p>';
         return;
     }
 
@@ -79,8 +84,6 @@ function displaySearchResults(cards, containerId) {
 
     resultsContainer.appendChild(ul);
 }
-
-
     // Function to add card to collection
     function addToCollection(card) {
         const collectionList = document.getElementById('cardCollection');
