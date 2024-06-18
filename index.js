@@ -47,12 +47,12 @@
     await populateSetDropdown();
 
     // Function to display search results
-    function displaySearchResults(cards) {
-        const searchResultsContainer = document.getElementById('searchResults');
-        searchResultsContainer.innerHTML = '';
+    function displaySearchResults(cards, containerId) {
+        const resultsContainer = document.getElementById(containerId);
+        resultsContainer.innerHTML = '';
 
         if (cards.length === 0) {
-            searchResultsContainer.innerHTML = '<p>No cards found.</p>';
+            resultsContainer.innerHTML = '<p>No cards found.</p>';
             return;
         }
 
@@ -64,11 +64,11 @@
             li.textContent = `${card.name} (${card.type}) - ${card.colors.join(', ')} - Power/Toughness: ${card.power || ''}/${card.toughness || ''}`;
             li.className = 'card-item';
             li.setAttribute('data-card-id', card.id);
-            li.addEventListener('click', () => addToCollection(card));
+            li.addEventListener('click', () => displayCardImage(card));
             ul.appendChild(li);
         });
 
-        searchResultsContainer.appendChild(ul);
+        resultsContainer.appendChild(ul);
     }
 
     // Function to add card to collection
@@ -77,6 +77,7 @@
         const li = document.createElement('li');
         li.textContent = `${card.name} (${card.type})`;
         li.className = 'card-item';
+        li.addEventListener('click', () => displayCardImage(card));
         collectionList.appendChild(li);
     }
 
@@ -91,61 +92,33 @@
         }
 
         const cards = await fetchCards({ name: cardName });
-        displaySearchResults(cards);
+        displaySearchResults(cards, 'searchResults');
     }
 
-    // Function to handle search button click by card type
-    async function searchCardByType() {
-        const cardTypeInput = document.getElementById('cardType');
-        const cardType = cardTypeInput.value.trim();
-
-        if (cardType === '') {
-            alert('Please enter a card type to search.');
-            return;
-        }
-
-        const cards = await fetchCards({ type: cardType });
-        displaySearchResults(cards);
-    }
-
-    // Function to filter cards by color
-    async function filterByColor() {
+    // Function to filter cards by color, type, and set
+    async function filterCards() {
         const cardColor = document.getElementById('cardColor').value;
-        if (cardColor === '') {
-            document.getElementById('colorFilteredResults').innerHTML = '<p>No color selected for filtering.</p>';
-            return;
-        }
+        const cardType = document.getElementById('cardType').value;
+        const cardSet = document.getElementById('cardSet').value;
 
         const cards = await fetchCards({});
-        const filteredCards = cards.filter(card => card.colors.includes(cardColor));
-
-        const colorFilteredResultsContainer = document.getElementById('colorFilteredResults');
-        colorFilteredResultsContainer.innerHTML = '';
-
-        if (filteredCards.length === 0) {
-            colorFilteredResultsContainer.innerHTML = '<p>No cards found for the selected color.</p>';
-            return;
-        }
-
-        const ul = document.createElement('ul');
-        ul.className = 'card-list';
-
-        filteredCards.forEach(card => {
-            const li = document.createElement('li');
-            li.textContent = `${card.name} (${card.type}) - ${card.colors.join(', ')} - Power/Toughness: ${card.power || ''}/${card.toughness || ''}`;
-            li.className = 'card-item';
-            li.setAttribute('data-card-id', card.id);
-            li.addEventListener('click', () => addToCollection(card));
-            ul.appendChild(li);
+        const filteredCards = cards.filter(card => {
+            const colorMatch = cardColor === '' || card.colors.includes(cardColor);
+            const typeMatch = cardType === '' || card.type.toLowerCase().includes(cardType.toLowerCase());
+            const setMatch = cardSet === '' || card.set.toLowerCase() === cardSet.toLowerCase();
+            return colorMatch && typeMatch && setMatch;
         });
 
-        colorFilteredResultsContainer.appendChild(ul);
+        const filteredResultsContainer = document.getElementById('filteredResults');
+        displaySearchResults(filteredCards, 'filteredResults');
     }
 
-    // Add event listeners
-    document.getElementById('searchButton').addEventListener('click', searchCard);
+    // Function to display the card image
+    function displayCardImage(card) {
+        const cardImage = document.getElementById('cardImage');
+        if (card.imageUrl) {
+            cardImage.src = card.imageUrl;
+            cardImage.style.display = 'block';
+        } else {
+            cardImage.style.display = 'none';
 
-    // Expose functions to global scope
-    window.searchCardByType = searchCardByType;
-    window.filterByColor = filterByColor;
-})();
