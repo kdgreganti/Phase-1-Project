@@ -43,6 +43,9 @@
         });
     }
 
+    // Call the populateSetDropdown function when the script loads
+    await populateSetDropdown();
+
     // Function to display search results
     function displaySearchResults(cards) {
         const searchResultsContainer = document.getElementById('searchResults');
