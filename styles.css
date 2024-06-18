@@ -77,8 +77,9 @@ button {
     margin-bottom: 20px;
 }
 
-#searchResults {
-    /* Add any other styles for search results container */
+.card-item img {
+    width: 175px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .filter {
