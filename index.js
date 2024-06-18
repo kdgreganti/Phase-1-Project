@@ -31,6 +31,18 @@
         }
     }
 
+    // Populate the set dropdown with available sets
+    async function populateSetDropdown() {
+        const sets = await fetchSets();
+        const setDropdown = document.getElementById('cardSet');
+        sets.forEach(set => {
+            const option = document.createElement('option');
+            option.value = set.code;
+            option.textContent = set.name;
+            setDropdown.appendChild(option);
+        });
+    }
+
     // Function to display search results
     function displaySearchResults(cards) {
         const searchResultsContainer = document.getElementById('searchResults');
