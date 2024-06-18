@@ -9,62 +9,49 @@
 <body>
     <div class="container">
         <h1>Magic: The Gathering Card Collection</h1>
+        <!-- Search container -->
         <div class="search-container">
             <label for="cardName">Search by Card Name:</label>
             <input type="text" id="cardName" placeholder="Enter card name">
             <button onclick="searchCard()">Search</button>
         </div>
-        <div id="searchResults"></div>
+        <!-- Filter container -->
         <div class="filter-container">
-            <div class="filter">
-                <label for="cardColor">Filter by Color:</label>
-                <select id="cardColor">
-                    <option value="">All Colors</option>
-                    <option value="White">White</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Black">Black</option>
-                    <option value="Red">Red</option>
-                    <option value="Green">Green</option>
-                    <option value="Colorless">Colorless</option>
-                </select>
-            </div>
-            <div class="filter">
-                <label for="cardType">Filter by Type:</label>
-                <select id="cardType">
-                    <option value="">All Types</option>
-                    <option value="Creature">Creature</option>
-                    <option value="Artifact">Artifact</option>
-                    <option value="Enchantment">Enchantment</option>
-                    <option value="Land">Land</option>
-                    <option value="Legendary">Legendary</option>
-                    <option value="Instant">Instant</option>
-                    <option value="Sorcery">Sorcery</option>
-                </select>
-            </div>
-            <div class="filter">
-                <label for="cardSet">Filter by Set:</label>
-                <select id="cardSet">
-                    <option value="">All Sets</option>
-                </select>
-            </div>
+            <label for="cardColor">Filter by Color:</label>
+            <select id="cardColor">
+                <option value="">All Colors</option>
+                <option value="White">White</option>
+                <option value="Blue">Blue</option>
+                <option value="Black">Black</option>
+                <option value="Red">Red</option>
+                <option value="Green">Green</option>
+                <option value="Colorless">Colorless</option>
+            </select>
+            <label for="cardType">Filter by Type:</label>
+            <select id="cardType">
+                <option value="">All Types</option>
+                <option value="Creature">Creature</option>
+                <option value="Artifact">Artifact</option>
+                <option value="Enchantment">Enchantment</option>
+                <option value="Land">Land</option>
+                <option value="Legendary">Legendary</option>
+                <option value="Instant">Instant</option>
+                <option value="Sorcery">Sorcery</option>
+            </select>
+            <label for="cardSet">Filter by Set:</label>
+            <select id="cardSet"></select>
             <button onclick="filterCards()">Filter</button>
         </div>
-        <div id="filteredResults"></div>
+        <!-- Search results -->
+        <div id="searchResultsContainer"></div>
+        <!-- Collection -->
         <div id="collection">
             <h2>My Collection</h2>
-            <ul id="cardCollection">
-                <!-- Collection items will be dynamically added here -->
-            </ul>
-        </div>
-        <div id="searchResultsContainer">
-            <h2>Search Results</h2>
-            <div id="searchResults"></div> <!-- Search results will be dynamically added here -->
-        </div>
-        <div id="cardDisplay" class="card-display">
-            <img id="cardImage" src="" alt="Card Image" style="display: none;">
+            <ul id="cardCollection"></ul>
         </div>
     </div>
     <script src="index.js"></script>
 </body>
 </html>
+
 
