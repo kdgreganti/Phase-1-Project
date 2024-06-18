@@ -50,24 +50,32 @@
     function displaySearchResults(cards, containerId) {
         const resultsContainer = document.getElementById(containerId);
         resultsContainer.innerHTML = '';
-
+    
         if (cards.length === 0) {
             resultsContainer.innerHTML = '<p>No cards found.</p>';
             return;
         }
-
+    
         const ul = document.createElement('ul');
         ul.className = 'card-list';
-
+    
         cards.forEach(card => {
             const li = document.createElement('li');
             li.textContent = `${card.name} (${card.type}) - ${card.colors.join(', ')} - Power/Toughness: ${card.power || ''}/${card.toughness || ''}`;
             li.className = 'card-item';
             li.setAttribute('data-card-id', card.id);
-            li.addEventListener('click', () => displayCardImage(card));
+            li.addEventListener('click', () => displayCardDetails(card));
             ul.appendChild(li);
+    
+            // Display card image if available
+            if (card.imageUrl) {
+                const img = document.createElement('img');
+                img.src = card.imageUrl;
+                img.alt = card.name;
+                li.appendChild(img);
+            }
         });
-
+    
         resultsContainer.appendChild(ul);
     }
 
