@@ -94,6 +94,18 @@ function displaySearchResults(cards, containerId) {
         collectionList.appendChild(li);
     }
 
+        // Function to remove a card from the collection
+function removeFromCollection(cardId) {
+    const collectionList = document.getElementById('cardCollection');
+    const cardToRemove = collectionList.querySelector(`[data-card-id="${cardId}"]`);
+    if (!cardToRemove) return;
+
+    const confirmRemoval = confirm(`Are you sure you want to remove "${cardToRemove.textContent.trim()}" from your collection?`);
+    if (confirmRemoval) {
+        collectionList.removeChild(cardToRemove);
+    }
+}
+
     // Function to handle search button click by card name
     async function searchCard() {
         const cardNameInput = document.getElementById('cardName');
