@@ -48,6 +48,10 @@ button {
     padding-top: 20px;
 }
 
+#collection h2 {
+    text-align: center;
+}
+
 #cardCollection {
     list-style-type: none;
     padding: 0;
@@ -60,6 +64,17 @@ button {
     background-color: #f9f9f9;
 }
 
-.color-filter {
-    margin-top: 20px;
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.color-filter, .type-filter {
+    flex: 1;
+}
+
+.filter-container label {
+    display: block;
+    margin-bottom: 5px;
 }
