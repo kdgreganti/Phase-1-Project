@@ -111,7 +111,7 @@ function displaySearchResults(cards, containerId) {
         if (cardSet) queryParams.set = cardSet;
     
         const cards = await fetchCards(queryParams);
-        displaySearchResults(cards, 'searchResults');
+        displaySearchResults(cards, 'searchResultsContainer'); // Display results below the "Search Results" title
     }
 
     // Function to filter cards by color, type, and set
