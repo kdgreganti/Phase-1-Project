@@ -14,12 +14,22 @@
             <input type="text" id="cardName" placeholder="Enter card name">
             <button onclick="searchCard()">Search</button>
         </div>
-        <div class="search-container">
-            <label for="cardType">Search by Card Type:</label>
-            <input type="text" id="cardType" placeholder="Enter card type (e.g., creature, artifact)">
-            <button onclick="searchCardByType()">Search</button>
+        <div class="type-filter">
+            <label for="cardType">Filter by Type:</label>
+            <select id="cardType">
+                <option value="">All Types</option>
+                <option value="Creature">Creature</option>
+                <option value="Artifact">Artifact</option>
+                <option value="Enchantment">Enchantment</option>
+                <option value="Land">Land</option>
+                <option value="Legendary">Legendary</option>
+                <option value="Instant">Instant</option>
+                <option value="Sorcery">Sorcery</option>
+            </select>
         </div>
-        <div id="searchResults"></div>
+        <button onclick="filterCards()">Filter</button>
+    </div>
+    <div id="filteredResults"></div>
         <div id="collection">
             <h2>My Collection</h2>
             <ul id="cardCollection">
