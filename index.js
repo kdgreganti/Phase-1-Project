@@ -101,6 +101,11 @@
         const cardType = document.getElementById('cardType').value;
         const cardSet = document.getElementById('cardSet').value;
 
+        const queryParams = {};
+        if (cardColor) queryParams.colors = cardColor;
+        if (cardType) queryParams.types = cardType;
+        if (cardSet) queryParams.set = cardSet;
+
         const cards = await fetchCards({});
         const filteredCards = cards.filter(card => {
             const colorMatch = cardColor === '' || card.colors.includes(cardColor);
