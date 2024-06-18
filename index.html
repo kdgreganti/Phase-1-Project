@@ -14,22 +14,36 @@
             <input type="text" id="cardName" placeholder="Enter card name">
             <button onclick="searchCard()">Search</button>
         </div>
-        <div class="type-filter">
-            <label for="cardType">Filter by Type:</label>
-            <select id="cardType">
-                <option value="">All Types</option>
-                <option value="Creature">Creature</option>
-                <option value="Artifact">Artifact</option>
-                <option value="Enchantment">Enchantment</option>
-                <option value="Land">Land</option>
-                <option value="Legendary">Legendary</option>
-                <option value="Instant">Instant</option>
-                <option value="Sorcery">Sorcery</option>
-            </select>
+        <div id="searchResults"></div>
+        <div class="filter-container">
+            <div class="filter">
+                <label for="cardColor">Filter by Color:</label>
+                <select id="cardColor">
+                    <option value="">All Colors</option>
+                    <option value="White">White</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Black">Black</option>
+                    <option value="Red">Red</option>
+                    <option value="Green">Green</option>
+                    <option value="Colorless">Colorless</option>
+                </select>
+            </div>
+            <div class="filter">
+                <label for="cardType">Filter by Type:</label>
+                <select id="cardType">
+                    <option value="">All Types</option>
+                    <option value="Creature">Creature</option>
+                    <option value="Artifact">Artifact</option>
+                    <option value="Enchantment">Enchantment</option>
+                    <option value="Land">Land</option>
+                    <option value="Legendary">Legendary</option>
+                    <option value="Instant">Instant</option>
+                    <option value="Sorcery">Sorcery</option>
+                </select>
+            </div>
+            <button onclick="filterCards()">Filter</button>
         </div>
-        <button onclick="filterCards()">Filter</button>
-    </div>
-    <div id="filteredResults"></div>
+        <div id="filteredResults"></div>
         <div id="collection">
             <h2>My Collection</h2>
             <ul id="cardCollection">
@@ -37,21 +51,6 @@
             </ul>
         </div>
     </div>
-    <div class="color-filter">
-        <label for="cardColor">Filter by Color:</label>
-        <select id="cardColor">
-            <option value="">All Colors</option>
-            <option value="White">White</option>
-            <option value="Blue">Blue</option>
-            <option value="Black">Black</option>
-            <option value="Red">Red</option>
-            <option value="Green">Green</option>
-            <option value="Colorless">Colorless</option>
-        </select>
-        <button onclick="filterByColor()">Filter</button>
-    </div>
-    <div id="colorFilteredResults"></div>
-    
     <script src="index.js"></script>
 </body>
 </html>
