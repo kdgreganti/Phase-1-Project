@@ -121,4 +121,12 @@
             cardImage.style.display = 'block';
         } else {
             cardImage.style.display = 'none';
+        }
+    }
+
+    // Expose functions to global scope
+    window.searchCard = searchCard;
+    window.filterCards = filterCards;
+})();
+
 
