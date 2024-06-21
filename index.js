@@ -1,3 +1,4 @@
+// Initializes document
 document.addEventListener("DOMContentLoaded", () => {
     fetchCards()
 });
@@ -8,40 +9,42 @@ function fetchCards() {
     .then(data => {
         debugger
     })
+};
+
+
+//Card Name Function
+function getCardName() {
+    const cardName = getElementById(cardName).value.toLowerCase();
+
+    fetch(`https://api.magicthegathering.io/v1/cards${cardName}`)
+    .then(response => response.json())
+    .then(data => {
+         data.cards.forEach(cards => {
+            console.log(cards.name);
+    })
+    .catch(error => console.error(error));
+})
 }
 
-// (async () => {
-//     // Function to fetch card data from Magic: The Gathering API
-//     async function fetchCards(queryParams) {
-//         const url = `https://api.magicthegathering.io/v1/cards?${new URLSearchParams(queryParams)}`;
-//         try {
-//             const response = await fetch(url);
-//             if (!response.ok) {
-//                 throw new Error('Network response was not ok');
-//             }
-//             const data = await response.json();
-//             return data.cards;
-//         } catch (error) {
-//             console.error('Error fetching data:', error);
-//             return [];
-//         }
-//     }
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', getCardName())
 
-//     // Function to fetch set data from Magic: The Gathering API
-//     async function fetchSets() {
-//         const url = `https://api.magicthegathering.io/v1/sets`;
-//         try {
-//             const response = await fetch(url);
-//             if (!response.ok) {
-//                 throw new Error('Network response was not ok');
-//             }
-//             const data = await response.json();
-//             return data.sets;
-//         } catch (error) {
-//             console.error('Error fetching sets:', error);
-//             return [];
-//         }
-//     }
+//Card Type Function
+function getCardType() {
+    const cardType = getElementById(cardType).value.toUpperCase();
+
+    fetch(`https://api.magicthegathering.io/v1/cards1`)
+    .then(response => response.json())
+    .then(data => {
+        data.cards.forEach(cards => {
+            console.log(cards.type);
+        })
+        .catch(error => console.error(error));
+    })
+}
+
+const landButton = document.getElementById('landButton');
+landButton.addEventListener('click', getCardType())
 
 //     // Populate the set dropdown with available sets
 //     async function populateSetDropdown() {
