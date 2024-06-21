@@ -8,17 +8,22 @@
         h1 {color: whitesmoke;}
     </style>
     <body>
-        <h1>Search Cards</h1> 
+        <h1>Search Name</h1> 
 
         <input type="text" id="cardName" placeholder="Enter Card Here">
-        <button onclick="getCardName()" id="searchButton">Find Your Card</button><br>
+        <button onclick="getCardName()" id="searchButton">Find Your Card Name</button><br>
 
-        <img src="https://api.magicthegathering.io/v1/cards" alt="Image Coming Soon" id="Images" style="display: none">
+        <img src="https://api.magicthegathering.io/v1/cards" alt="Image Coming Soon" id="Images" style="display: ">
 
-        <h1>Search Lands</h1>
+        <h1>Search Type</h1>
 
         <input type ="text" id="cardType" placeholder="Enter Type Here">
-        <button onclick="getCardType()" id="landButton">Find Your Land</button><br>
+        <button onclick="getCardType()" id="landButton">Find Your Card Type</button><br>
+
+        <h1>Search Color</h1>
+
+        <input type="text" id="cardColor" placeholder="Enter Color Here">
+        <button onclick="getCardColor()" id="colorButton">Find Your Color Here</button><br>
         
         <script src="index.js"></script>
     </body>

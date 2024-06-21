@@ -14,37 +14,49 @@ function fetchCards() {
 
 //Card Name Function
 function getCardName() {
-    const cardName = getElementById(cardName).value.toLowerCase();
+    const cardName = document.getElementById('cardName').value.toLowerCase();
 
-    fetch(`https://api.magicthegathering.io/v1/cards${cardName}`)
+    fetch(`https://api.magicthegathering.io/v1/cards?name=${cardName}`)
     .then(response => response.json())
     .then(data => {
          data.cards.forEach(cards => {
             console.log(cards.name);
+        })
     })
     .catch(error => console.error(error));
-})
 }
-
 const searchButton = document.getElementById('searchButton');
-searchButton.addEventListener('click', getCardName())
-
+searchButton.addEventListener('click', getCardName)
 //Card Type Function
 function getCardType() {
-    const cardType = getElementById(cardType).value.toUpperCase();
+    const cardType = document.getElementById('cardType').value.toLowerCase();
 
-    fetch(`https://api.magicthegathering.io/v1/cards1`)
+    fetch(`https://api.magicthegathering.io/v1/cards?type=${cardType}`)
     .then(response => response.json())
     .then(data => {
         data.cards.forEach(cards => {
             console.log(cards.type);
         })
-        .catch(error => console.error(error));
     })
+    .catch(error => console.error(error));
 }
-
 const landButton = document.getElementById('landButton');
-landButton.addEventListener('click', getCardType())
+landButton.addEventListener('click', getCardType)
+//Card Color Function
+function getCardColor() {
+    const cardColor = document.getElementById('cardColr').value.toLowerCase();
+
+    fetch(`https://api.magicthegathering.io/v1/cards?color=${cardColor}`)
+    .then(response => response.json())
+    .then(data => {
+        data.cards.forEach(cards => {
+            console.log(cards.color);
+        })
+    })
+    .catch(error => console.error(error));
+}
+const colorButton = document.getElementById('colorButton');
+colorButton.addEventListener('click', getCardColor);
 
 //     // Populate the set dropdown with available sets
 //     async function populateSetDropdown() {
