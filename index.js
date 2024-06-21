@@ -1,168 +1,180 @@
-(async () => {
-    // Function to fetch card data from Magic: The Gathering API
-    async function fetchCards(queryParams) {
-        const url = `https://api.magicthegathering.io/v1/cards?${new URLSearchParams(queryParams)}`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            return data.cards;
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            return [];
-        }
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    fetchCards()
+});
+function fetchCards() {
+    const url = `https://api.magicthegathering.io/v1/cards`;
+    fetch(url) 
+    .then(r => r.json())
+    .then(data => {
+        debugger
+    })
+}
 
-    // Function to fetch set data from Magic: The Gathering API
-    async function fetchSets() {
-        const url = `https://api.magicthegathering.io/v1/sets`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            return data.sets;
-        } catch (error) {
-            console.error('Error fetching sets:', error);
-            return [];
-        }
-    }
+// (async () => {
+//     // Function to fetch card data from Magic: The Gathering API
+//     async function fetchCards(queryParams) {
+//         const url = `https://api.magicthegathering.io/v1/cards?${new URLSearchParams(queryParams)}`;
+//         try {
+//             const response = await fetch(url);
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             const data = await response.json();
+//             return data.cards;
+//         } catch (error) {
+//             console.error('Error fetching data:', error);
+//             return [];
+//         }
+//     }
 
-    // Populate the set dropdown with available sets
-    async function populateSetDropdown() {
-        const sets = await fetchSets();
-        const setDropdown = document.getElementById('cardSet');
+//     // Function to fetch set data from Magic: The Gathering API
+//     async function fetchSets() {
+//         const url = `https://api.magicthegathering.io/v1/sets`;
+//         try {
+//             const response = await fetch(url);
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             const data = await response.json();
+//             return data.sets;
+//         } catch (error) {
+//             console.error('Error fetching sets:', error);
+//             return [];
+//         }
+//     }
 
-         // Add option for all sets as default
-        const allSetsOption = document.createElement('option');
-        allSetsOption.value = '';
-        allSetsOption.textContent = 'All Sets';
-        setDropdown.appendChild(allSetsOption);
+//     // Populate the set dropdown with available sets
+//     async function populateSetDropdown() {
+//         const sets = await fetchSets();
+//         const setDropdown = document.getElementById('cardSet');
 
-        sets.forEach(set => {
-            const option = document.createElement('option');
-            option.value = set.code;
-            option.textContent = set.name;
-            setDropdown.appendChild(option);
-        });
-    }
+//          // Add option for all sets as default
+//         const allSetsOption = document.createElement('option');
+//         allSetsOption.value = '';
+//         allSetsOption.textContent = 'All Sets';
+//         setDropdown.appendChild(allSetsOption);
 
-    // Call the populateSetDropdown function when the script loads
-    await populateSetDropdown();
+//         sets.forEach(set => {
+//             const option = document.createElement('option');
+//             option.value = set.code;
+//             option.textContent = set.name;
+//             setDropdown.appendChild(option);
+//         });
+//     }
 
-    // Function to display search results
-    function displaySearchResults(cards, containerId) {
-        const resultsContainer = document.getElementById(containerId);
-        resultsContainer.innerHTML = ''; // Clear previous results
+//     // Call the populateSetDropdown function when the script loads
+//     await populateSetDropdown();
 
-        // Add title "Search Results"
-        const title = document.createElement('h2');
-        title.textContent = 'Search Results';
-        resultsContainer.appendChild(title);
+//     // Function to display search results
+//     function displaySearchResults(cards, containerId) {
+//         const resultsContainer = document.getElementById(containerId);
+//         resultsContainer.innerHTML = ''; // Clear previous results
 
-        if (cards.length === 0) {
-            resultsContainer.innerHTML += '<p>No cards found.</p>';
-            return;
-        }
+//         // Add title "Search Results"
+//         const title = document.createElement('h2');
+//         title.textContent = 'Search Results';
+//         resultsContainer.appendChild(title);
 
-        const ul = document.createElement('ul');
-        ul.className = 'card-list';
+//         if (cards.length === 0) {
+//             resultsContainer.innerHTML += '<p>No cards found.</p>';
+//             return;
+//         }
 
-        cards.forEach(card => {
-            const li = document.createElement('li');
-            li.className = 'card-item';
-            li.setAttribute('data-card-id', card.id);
-            li.addEventListener('click', () => addToCollection(card));
+//         const ul = document.createElement('ul');
+//         ul.className = 'card-list';
 
-            // Display card image if available
-            if (card.imageUrl) {
-                const img = document.createElement('img');
-                img.src = card.imageUrl;
-                img.alt = card.name;
-                li.appendChild(img);
-            }
+//         cards.forEach(card => {
+//             const li = document.createElement('li');
+//             li.className = 'card-item';
+//             li.setAttribute('data-card-id', card.id);
+//             li.addEventListener('click', () => addToCollection(card));
 
-            ul.appendChild(li);
-        });
+//             // Display card image if available
+//             if (card.imageUrl) {
+//                 const img = document.createElement('img');
+//                 img.src = card.imageUrl;
+//                 img.alt = card.name;
+//                 li.appendChild(img);
+//             }
 
-        resultsContainer.appendChild(ul);
-    }
+//             ul.appendChild(li);
+//         });
 
-    // Function to add card to collection
-    function addToCollection(card) {
-        const collectionList = document.getElementById('cardCollection');
-        const li = document.createElement('li');
-        li.textContent = `${card.name} (${card.type})`;
-        li.className = 'card-item';
-        li.setAttribute('data-card-id', card.id);
-        li.addEventListener('click', () => removeFromCollection(card.id)); // Add event listener to remove the card
-        collectionList.appendChild(li);
-    }
+//         resultsContainer.appendChild(ul);
+//     }
 
-    // Function to remove a card from the collection
-    function removeFromCollection(cardId) {
-        const collectionList = document.getElementById('cardCollection');
-        const cardToRemove = collectionList.querySelector(`[data-card-id="${cardId}"]`);
-        if (!cardToRemove) return;
+//     // Function to add card to collection
+//     function addToCollection(card) {
+//         const collectionList = document.getElementById('cardCollection');
+//         const li = document.createElement('li');
+//         li.textContent = `${card.name} (${card.type})`;
+//         li.className = 'card-item';
+//         li.setAttribute('data-card-id', card.id);
+//         li.addEventListener('click', () => removeFromCollection(card.id)); // Add event listener to remove the card
+//         collectionList.appendChild(li);
+//     }
 
-        const confirmRemoval = confirm(`Are you sure you want to remove "${cardToRemove.textContent.trim()}" from your collection?`);
-        if (confirmRemoval) {
-            collectionList.removeChild(cardToRemove);
-        }
-    }
+//     // Function to remove a card from the collection
+//     function removeFromCollection(cardId) {
+//         const collectionList = document.getElementById('cardCollection');
+//         const cardToRemove = collectionList.querySelector(`[data-card-id="${cardId}"]`);
+//         if (!cardToRemove) return;
 
-    // Function to handle search button click by card name
-    async function searchCard() {
-        const cardNameInput = document.getElementById('cardName');
-        const cardName = cardNameInput.value.trim();
+//         const confirmRemoval = confirm(`Are you sure you want to remove "${cardToRemove.textContent.trim()}" from your collection?`);
+//         if (confirmRemoval) {
+//             collectionList.removeChild(cardToRemove);
+//         }
+//     }
 
-        if (cardName === '') {
-            alert('Please enter a card name to search.');
-            return;
-        }
+//     // Function to handle search button click by card name
+//     async function searchCard() {
+//         const cardNameInput = document.getElementById('cardName');
+//         const cardName = cardNameInput.value.trim();
 
-        const cardColor = document.getElementById('cardColor').value;
-        const cardType = document.getElementById('cardType').value;
-        const cardSet = document.getElementById('cardSet').value;
+//         if (cardName === '') {
+//             alert('Please enter a card name to search.');
+//             return;
+//         }
 
-        const queryParams = { name: cardName };
-        if (cardColor) queryParams.colors = cardColor;
-        if (cardType) queryParams.types = cardType;
-        if (cardSet) queryParams.set = cardSet;
+//         const cardColor = document.getElementById('cardColor').value;
+//         const cardType = document.getElementById('cardType').value;
+//         const cardSet = document.getElementById('cardSet').value;
 
-        const cards = await fetchCards(queryParams);
-        displaySearchResults(cards, 'searchResultsContainer'); // Display results below the "Search Results" title
-    }
+//         const queryParams = { name: cardName };
+//         if (cardColor) queryParams.colors = cardColor;
+//         if (cardType) queryParams.types = cardType;
+//         if (cardSet) queryParams.set = cardSet;
 
-    // Function to filter cards by color, type, and set
-    async function filterCards() {
-        const cardColor = document.getElementById('cardColor').value;
-        const cardType = document.getElementById('cardType').value;
-        const cardSet = document.getElementById('cardSet').value;
+//         const cards = await fetchCards(queryParams);
+//         displaySearchResults(cards, 'searchResultsContainer'); // Display results below the "Search Results" title
+//     }
 
-        const queryParams = {};
-        if (cardColor) queryParams.colors = cardColor;
-        if (cardType) queryParams.types = cardType;
-        if (cardSet) queryParams.set = cardSet;
+//     // Function to filter cards by color, type, and set
+//     async function filterCards() {
+//         const cardColor = document.getElementById('cardColor').value;
+//         const cardType = document.getElementById('cardType').value;
+//         const cardSet = document.getElementById('cardSet').value;
 
-        const cards = await fetchCards({});
-        const filteredCards = cards.filter(card => {
-            const colorMatch = cardColor === '' || card.colors.includes(cardColor);
-            const typeMatch = cardType === '' || card.type.toLowerCase().includes(cardType.toLowerCase());
-            const setMatch = cardSet === '' || card.set.toLowerCase() === cardSet.toLowerCase();
-            return colorMatch && typeMatch && setMatch;
-        });
+//         const queryParams = {};
+//         if (cardColor) queryParams.colors = cardColor;
+//         if (cardType) queryParams.types = cardType;
+//         if (cardSet) queryParams.set = cardSet;
 
-        const filteredResultsContainer = document.getElementById('filteredResults');
-        displaySearchResults(filteredCards, 'filteredResults');
-    }
+//         const cards = await fetchCards({});
+//         const filteredCards = cards.filter(card => {
+//             const colorMatch = cardColor === '' || card.colors.includes(cardColor);
+//             const typeMatch = cardType === '' || card.type.toLowerCase().includes(cardType.toLowerCase());
+//             const setMatch = cardSet === '' || card.set.toLowerCase() === cardSet.toLowerCase();
+//             return colorMatch && typeMatch && setMatch;
+//         });
 
-    // Expose functions to global scope
-    window.searchCard = searchCard;
-    window.filterCards = filterCards;
-})();
+//         const filteredResultsContainer = document.getElementById('filteredResults');
+//         displaySearchResults(filteredCards, 'filteredResults');
+//     }
+
+//     // Expose functions to global scope
+//     window.searchCard = searchCard;
+//     window.filterCards = filterCards;
+// })();
 
 
