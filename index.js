@@ -43,7 +43,7 @@ function getCardType() {
     })
     .catch(error => console.error(error));
 }
-const landButton = document.getElementById('landButton');
+const landButton = document.getElementById('typeButton');
 landButton.addEventListener('keydown', getCardType)
 //Card Color Function
 function getCardRarity() {
