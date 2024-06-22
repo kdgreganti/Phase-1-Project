@@ -13,6 +13,9 @@ body {
     font-size: 150%;
     text-align: center;
 }
+#names{
+    text-align: center;
+}
 #types {
     text-align: center;
 }
