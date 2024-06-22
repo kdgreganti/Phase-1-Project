@@ -46,24 +46,24 @@ function getCardType() {
 const landButton = document.getElementById('landButton');
 landButton.addEventListener('keydown', getCardType)
 //Card Color Function
-function getCardColor() {
-    const cardColor = document.getElementById('cardColor').value.toLowerCase();
-    fetch(`https://api.magicthegathering.io/v1/cards?color=${cardColor}`)
+function getCardRarity() {
+    const cardRarity = document.getElementById('cardRarity').value.toLowerCase();
+    fetch(`https://api.magicthegathering.io/v1/cards?rarity=${cardRarity}`)
     .then(response => response.json())
     .then(data => {
         data.cards.forEach(card => {
-            console.log(card.colors);
+            console.log(card.rarity);
             const imgElement = document.createElement("img");
             imgElement.src = card.imageUrl
             imgElement.style.display = "block";
-            const images = document.querySelector('#colorImages');
+            const images = document.querySelector('#rarityImages');
             images.appendChild(imgElement);
         })
     })
     .catch(error => console.error(error));
 }
-const colorButton = document.getElementById('colorButton');
-colorButton.addEventListener('click', getCardColor);
+const colorButton = document.getElementById('rarityButton');
+colorButton.addEventListener('click', getCardRarity);
 
 
 
