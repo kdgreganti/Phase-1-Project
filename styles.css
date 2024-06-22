@@ -13,10 +13,22 @@ body {
     font-size: 150%;
     text-align: center;
 }
-#names{
+#names {
+    text-align: center;
+}
+#type {
+    color: red;
+    font-family: 'Trebuchet MS';
+    font-size: 150%;
     text-align: center;
 }
 #types {
+    text-align: center;
+}
+#rarity {
+    color: beige;
+    font-family: sans-serif;
+    font-size: 150%;
     text-align: center;
 }
 #rarities {
