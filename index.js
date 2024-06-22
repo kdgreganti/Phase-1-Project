@@ -2,16 +2,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     displayText()
 });
+//Displays Welcome message when DOM is loaded.
 function displayText() {
     let message = document.querySelector('h1')
     message.innerHTML = 'Welcome to Your NEW MTG Card Finder!'
 };
-
-
 //Card Name Function
 function getCardName() {
     const cardName = document.getElementById('cardName').value.toLowerCase();
-
     fetch(`https://api.magicthegathering.io/v1/cards?name=${cardName}`)
     .then(response => response.json())
     .then(data => {
@@ -31,7 +29,6 @@ searchButton.addEventListener('click', getCardName)
 //Card Type Function
 function getCardType() {
     const cardType = document.getElementById('cardType').value.toLowerCase();
-
     fetch(`https://api.magicthegathering.io/v1/cards?type=${cardType}`)
     .then(response => response.json())
     .then(data => {
