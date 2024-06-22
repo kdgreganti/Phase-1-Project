@@ -1,8 +1,15 @@
 body {
     background-color: black;
 }
-
 #message {
     color: blue;
-    
+    font-family: 'Franklin Gothic Medium';
+    font-size: 300%;
+    text-align: center;
+}
+#name {
+    color: violet;
+    font-family: Verdana;
+    font-size: 150%;
+    text-align: center;
 }
