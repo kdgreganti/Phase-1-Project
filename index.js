@@ -3,12 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     displayText()
 });
 function displayText() {
-    console.log('Welcome to Your NEW MTG Card Finder!');
-    const textElement = document.createElement('div');
-    const textNode = document.createTextNode('Welcome to Your NEW MTG Card Finder!');
-    textElement.appendChild(textNode);
-
-    document.body.appendChild(textElement);
+    let message = document.querySelector('h1')
+    message.innerHTML = 'Welcome to Your NEW MTG Card Finder!'
 };
 
 
@@ -31,7 +27,7 @@ function getCardName() {
     .catch(error => console.error(error));
 }
 const searchButton = document.getElementById('searchButton');
-searchButton.addEventListener('', getCardName)
+searchButton.addEventListener('click', getCardName)
 //Card Type Function
 function getCardType() {
     const cardType = document.getElementById('cardType').value.toLowerCase();
@@ -54,8 +50,8 @@ function getCardColor() {
     fetch(`https://api.magicthegathering.io/v1/cards?color=${cardColor}`)
     .then(response => response.json())
     .then(data => {
-        data.cards.forEach(cards => {
-            console.log(cards.color);
+        data.cards.forEach(card => {
+            console.log(card.color);
         })
     })
     .catch(error => console.error(error));
