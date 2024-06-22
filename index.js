@@ -1,14 +1,14 @@
 // Initializes document
 document.addEventListener("DOMContentLoaded", () => {
-    fetchCards()
+    displayText()
 });
-function fetchCards() {
-    const url = `https://api.magicthegathering.io/v1/cards`;
-    fetch(url) 
-    .then(r => r.json())
-    .then(data => {
-        debugger
-    })
+function displayText() {
+    console.log('Welcome to Your NEW MTG Card Finder!');
+    const textElement = document.createElement('div');
+    const textNode = document.createTextNode('Welcome to Your NEW MTG Card Finder!');
+    textElement.appendChild(textNode);
+
+    document.body.appendChild(textElement);
 };
 
 
@@ -19,14 +19,19 @@ function getCardName() {
     fetch(`https://api.magicthegathering.io/v1/cards?name=${cardName}`)
     .then(response => response.json())
     .then(data => {
-         data.cards.forEach(cards => {
-            console.log(cards.name);
+         data.cards.forEach(card => {
+            console.log(card.name);
+            const imgElement = document.createElement("img");
+            imgElement.src = card.imageUrl
+            imgElement.style.display = "block";
+            const images = document.querySelector('#images');
+            images.appendChild(imgElement);
         })
     })
     .catch(error => console.error(error));
 }
 const searchButton = document.getElementById('searchButton');
-searchButton.addEventListener('click', getCardName)
+searchButton.addEventListener('', getCardName)
 //Card Type Function
 function getCardType() {
     const cardType = document.getElementById('cardType').value.toLowerCase();
@@ -34,17 +39,17 @@ function getCardType() {
     fetch(`https://api.magicthegathering.io/v1/cards?type=${cardType}`)
     .then(response => response.json())
     .then(data => {
-        data.cards.forEach(cards => {
-            console.log(cards.type);
+        data.cards.forEach(card => {
+            console.log(card.type);
         })
     })
     .catch(error => console.error(error));
 }
 const landButton = document.getElementById('landButton');
-landButton.addEventListener('click', getCardType)
+landButton.addEventListener('keydown', getCardType)
 //Card Color Function
 function getCardColor() {
-    const cardColor = document.getElementById('cardColr').value.toLowerCase();
+    const cardColor = document.getElementById('cardColor').value.toLowerCase();
 
     fetch(`https://api.magicthegathering.io/v1/cards?color=${cardColor}`)
     .then(response => response.json())
